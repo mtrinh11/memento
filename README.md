@@ -2,19 +2,18 @@
 
 By Minh Trinh | November 17, 2020
 
-***
+
 
 ## Contact
 
 [LinkedIn](https://www.linkedin.com/in/m-trinh/) | [Github](https://github.com/mtrinh11)
 
-***
 
 ## Description
 
 This web app is a place to track your journey in life. It can help you with reflection on the past, collecting the present, and planning with the future
 
-***
+
 ## User Stories
 
 - User will be able to create an account
@@ -23,7 +22,7 @@ This web app is a place to track your journey in life. It can help you with refl
 - User will be able to go back to previous posts
 - User will be able to add sections for custom tracking
 
-***
+
 
 ## Technologies Used
 * React 
@@ -33,11 +32,11 @@ This web app is a place to track your journey in life. It can help you with refl
 * MongoDB
 * Mongoose
 
-***
+
 ## Getting Started
 
 Start by ... The project was deployed on and can be found [here]().
 
-***
+
 ## Credits
 
