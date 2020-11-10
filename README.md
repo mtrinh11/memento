@@ -15,6 +15,15 @@ By Minh Trinh | November 17, 2020
 This web app is a place to track your journey in life. It can help you with reflection on the past, collecting the present, and planning with the future
 
 ***
+## User Stories
+
+- User will be able to create an account
+- User will have to be authenticated
+- User will be able to have journal entries (which will include different aspects)
+- User will be able to go back to previous posts
+- User will be able to add sections for custom tracking
+
+***
 
 ## Technologies Used
 * React 
