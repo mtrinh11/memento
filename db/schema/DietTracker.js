@@ -2,7 +2,7 @@ const {Schema} = require('mongoose');
 
 module.exports = new Schema (
     {
-        diet =[{type:String}],
+        diet: [{type: String}]
     },
     {timestamps:true}
 )

@@ -1,3 +1,5 @@
+import '../styles/Signup.css'
+
 import React, { Component } from 'react'
 import TextInput from '../components/TextInput'
 import { RegisterUser } from '../services/UserServices'

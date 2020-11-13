@@ -1,3 +1,4 @@
+import '../styles/Signup.css'
 import React, { Component } from 'react'
 import TextInput from '../components/TextInput'
 import { LoginUser } from '../services/UserServices'
@@ -20,7 +21,7 @@ export default class SignIn extends Component {
     e.preventDefault()
     try {
       const loginData = await LoginUser(this.state)
-      // console.log(loginData)
+      console.log(loginData)
       this.props.toggleAuthenticated(true, loginData.user, () =>
         this.props.history.push('/profile')
       )

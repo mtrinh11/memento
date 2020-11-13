@@ -1,20 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import '../styles/Nav.css'
+import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader } from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
 
 export default ({ authenticated, currentUser, className }) => {
   return authenticated && currentUser ? (
     <header className={className}>
-      <div className="icon">Welcome Back {currentUser.name}</div>
       <nav>
-        <NavLink activeClassName="nav-active" to="/profile">
-          Profile
-        </NavLink>
-        <NavLink activeClassName="nav-active" to="/discover">
-          Discover
-        </NavLink>
-        <NavLink activeClassName="nav-active" to="/upload">
-          Create Post
-        </NavLink>
         <NavLink
           activeClassName="nav-active"
           to="/"
@@ -22,6 +15,7 @@ export default ({ authenticated, currentUser, className }) => {
         >
           Sign Out
         </NavLink>
+        <h1> memento </h1>
       </nav>
     </header>
   ) : (
@@ -34,6 +28,7 @@ export default ({ authenticated, currentUser, className }) => {
         <NavLink activeClassName="nav-active" to="/login">
           Sign In
         </NavLink>
+        <h1> memento </h1>
       </nav>
     </header>
   )

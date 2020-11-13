@@ -1,16 +1,16 @@
-import '../styles/Router.css'
 
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import HomePage from '../pages/HomePage';
 
-import Nav from './Nav'
+import Layout from './Layout'
 import Sidebar from './Sidebar'
-
-import CalendarHeatmap from 'react-calendar-heatmap';
-import 'react-calendar-heatmap/dist/styles.css';
+import ProtectedRoute from './ProtectedRoute';
+import Profile from './Profile';
+import CreateEntry from './CreateEntry'
 
 import { CheckSession } from '../services/UserServices'
 
@@ -54,7 +54,7 @@ class Router extends Component {
         if (token) {
           try {
             const session = await CheckSession()
-            console.log('session', session)
+            // console.log('session', session)
             this.setState(
               {
                 currentUser: session.user,
@@ -72,119 +72,70 @@ class Router extends Component {
       toggleAuthenticated = (value, user, done) => {
         this.setState({ authenticated: value, currentUser: user }, () => done())
       }
-      
-      dateArray = (start, end) => {
-        let dateArray = [];
-        let startDate = new Date(start);
-        let endDate = new Date(end)
-        while (startDate <= endDate) {
-          dateArray.push(new Date(startDate));
-          startDate.setDate(startDate.getDate() + 1);
-        }
-        return dateArray
-      }
 
       render() {
+        console.log(this.state.currentUser)
           return (
             <main>
-              {/* <h1>mem</h1> */}
-              <Nav 
-                className='navbar' 
-                authenticated={this.state.authenticated}
-                currentUser={this.state.currentUser}
-              />
-              <Sidebar className='sidebar'/>
-              <div style={{margin:"100px"}}>
-                <CalendarHeatmap
-                showWeekdayLabels={false}
-                showMonthLabels={true}
-                showOutOfRangeDays={true}
-                startDate={new Date('2020-08-01')}
-                // today = `${Date.now.getFullYear}-${Date.now.getMonth 3}-${Date.now.getDay}`
-                endDate={new Date().toLocaleDateString()}
-                onMouseOver={(event, value) => console.log(value)}
-                classForValue={(value) => {
-                  if (!value) {
-                    return 'color-empty';
-                  }
-                  return `color-scale-${value.count}`;
-                }}
-                values={
-                  this.dateArray('2020-08-01', '2020-11-30').map((value) => ({date: value, count: 2}))
-                  // { date: '2020-10-01', count: 1 },
-                  // { date: '2020-10-22', count: 2 },
-                  // { date: '2020-11-15', count: 2 },
-                  // ...and so on
-                }
-              />
-              </div>
-              
-
-            {this.state.pageLoading ? (
-              <h3>Loading...</h3>
-            ) : (
+              {this.state.pageLoading ? (
+                <h3>Loading...</h3>
+              ) : (
               <Switch>
-                {/* <Route
+                <Route
                   exact
                   path="/"
                   component={() => (
-                    <LandingPage>
-                      <Home />
-                    </LandingPage>
+                    <Layout>
+                      <HomePage />
+                    </Layout>
                   )}
-                /> */}
+                />
                 <Route
                   path="/register"
                   component={(props) => (
-                    <div>                  
+                    <Layout>
                       <SignUp {...props} />
-                    </div>
+                    </Layout>                 
                   )}
                 />
                 <Route
                   path="/login"
                   component={(props) => (
+                    <Layout>
                       <SignIn
                         toggleAuthenticated={this.toggleAuthenticated}
                         {...props}
                       />
-                  )}
-                />
-                {/* <Route
-                  path="/discover"
-                  component={(props) => (
-                    <Layout
-                      currentUser={this.state.currentUser}
-                      authenticated={this.state.authenticated}
-                    >
-                      <Discover {...props} />
-                    </Layout>
-                  )}
-                />
-                <Route
-                  path="/posts/:post_id"
-                  component={(props) => (
-                    <Layout
-                      currentUser={this.state.currentUser}
-                      authenticated={this.state.authenticated}
-                    >
-                      <ViewPost {...props} />
                     </Layout>
                   )}
                 />
                 <ProtectedRoute
                   authenticated={this.state.authenticated}
-                  path="/profile"
+                  exact path="/profile"
                   component={(props) => (
                     <Layout
                       currentUser={this.state.currentUser}
                       authenticated={this.state.authenticated}
                     >
-                      <Profile {...props} currentUser={this.state.currentUser} />
+                      <Sidebar User={this.state.currentUser}/>
+                      <Profile {...props}/>
                     </Layout>
                   )}
                 />
                 <ProtectedRoute
+                  authenticated={this.state.authenticated}
+                  path="/profile/entry"
+                  component={(props) => (
+                    <Layout
+                      currentUser={this.state.currentUser}
+                      authenticated={this.state.authenticated}
+                    >
+                      <Sidebar User={this.state.currentUser}/>
+                      <CreateEntry {...props} currentUser={this.state.currentUser._id}></CreateEntry>
+                    </Layout>
+                  )}
+                />
+                {/* <ProtectedRoute
                   authenticated={this.state.authenticated}
                   path="/upload"
                   component={(props) => (
@@ -195,8 +146,8 @@ class Router extends Component {
                       <CreatePost {...props} currentUser={this.state.currentUser} />
                     </Layout>
                   )}
-                />
-                <ProtectedRoute
+                /> */}
+                {/* <ProtectedRoute
                   authenticated={this.state.authenticated}
                   path="/edit/:post_id"
                   component={(props) => (

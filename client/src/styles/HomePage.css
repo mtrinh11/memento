@@ -1,0 +1,8 @@
+div .example {
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
