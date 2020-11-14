@@ -24,7 +24,6 @@ const CreateUser = async (req, res) => {
       name: body.name,
       email: body.email,
       password_digest,
-      entries: []
     })
     user.save()
     res.send(user)
@@ -43,7 +42,6 @@ const SignInUser = async (req, res, next) => {
       const payload = {
         _id: user._id,
         name: user.name,
-        entries: user.entries
       }
       console.log(payload)
       res.locals.payload = payload

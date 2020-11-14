@@ -1,5 +1,7 @@
 
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+
 import TextInput from '../components/TextInput'
 import {LogEntry} from '../services/JournalEntryServices'
 
@@ -8,9 +10,9 @@ export default class CreateEntry extends Component {
       super()
       this.state = {
           formError: false,
-          userID:'',
           date: '',
-          entry: ''
+          entry: '',
+          sleep: '',
       }
     }
   
@@ -33,11 +35,12 @@ export default class CreateEntry extends Component {
 
     render() {
         console.log(this.state)
-      const { date, entry } = this.state
+      const { date, entry, sleep } = this.state
       return (
         <div className="signin flex-col">
           <form className="flex-col" onSubmit={this.handleSubmit}>
             <TextInput
+              required='true'
               placeholder="Date"
               name="date"
               type="date"
@@ -45,13 +48,36 @@ export default class CreateEntry extends Component {
               onChange={this.handleChange}
             />
             <TextInput
+              style={{width: '100%', textAlign: 'center'}}
+              placeholder="How many hours did you sleep last night?"
+              name="sleep"
+              type="number"
+              value={sleep}
+              onChange={this.handleChange}
+            />
+            <TextInput
+              required='true'
+              fieldType='textfield'
+              placeholder="Today I..."
+              style={{width: '100%', height: "200px"}}
+              name="entry"
+              type="textarea"
+              value={entry}
+              onChange={this.handleChange}
+            />
+            {/* <TextInput
               placeholder="Today I..."
               name="entry"
               type="text"
               value={entry}
               onChange={this.handleChange}
-            />
+            /> */}
+            <br/><br/>
             <button>Enter</button>
+            <br/><br/>
+            <NavLink activeClassName="nav-active" to="/profile">
+          Sign In
+        </NavLink>
             {this.state.formError ? <p>Error While Submitting Entry</p> : <p></p>}
           </form>
         </div>

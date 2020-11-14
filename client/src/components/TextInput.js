@@ -3,6 +3,8 @@ import React from 'react'
 export default (props) =>
   props.fieldType === 'textfield' ? (
     <textarea
+      required={props.required}
+      style={props.style}
       type={props.type}
       name={props.name}
       value={props.value}
@@ -11,6 +13,8 @@ export default (props) =>
     />
   ) : (
     <input
+      required={props.required}
+      style={props.style}
       type={props.type}
       name={props.name}
       value={props.value}

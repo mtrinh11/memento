@@ -5,12 +5,13 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import HomePage from '../pages/HomePage';
+import DisplayEntry from '../pages/DisplayEntry';
 
 import Layout from './Layout'
 import Sidebar from './Sidebar'
 import ProtectedRoute from './ProtectedRoute';
 import Profile from './Profile';
-import CreateEntry from './CreateEntry'
+import CreateEntry from './CreateEntry';
 
 import { CheckSession } from '../services/UserServices'
 
@@ -54,7 +55,6 @@ class Router extends Component {
         if (token) {
           try {
             const session = await CheckSession()
-            // console.log('session', session)
             this.setState(
               {
                 currentUser: session.user,
@@ -74,7 +74,6 @@ class Router extends Component {
       }
 
       render() {
-        console.log(this.state.currentUser)
           return (
             <main>
               {this.state.pageLoading ? (
@@ -118,13 +117,13 @@ class Router extends Component {
                       authenticated={this.state.authenticated}
                     >
                       <Sidebar User={this.state.currentUser}/>
-                      <Profile {...props}/>
+                      <Profile {...props} currentUser={this.state.currentUser}/>
                     </Layout>
                   )}
                 />
                 <ProtectedRoute
                   authenticated={this.state.authenticated}
-                  path="/profile/entry"
+                  exact path="/profile/entry"
                   component={(props) => (
                     <Layout
                       currentUser={this.state.currentUser}
@@ -132,6 +131,19 @@ class Router extends Component {
                     >
                       <Sidebar User={this.state.currentUser}/>
                       <CreateEntry {...props} currentUser={this.state.currentUser._id}></CreateEntry>
+                    </Layout>
+                  )}
+                />
+                <ProtectedRoute
+                  authenticated={this.state.authenticated}
+                  exact path="/profile/entry/:post_id"
+                  component={(props) => (
+                    <Layout
+                      currentUser={this.state.currentUser}
+                      authenticated={this.state.authenticated}
+                    >
+                      <Sidebar User={this.state.currentUser}/>
+                      <DisplayEntry {...props} currentUser={this.state.currentUser}/>
                     </Layout>
                   )}
                 />

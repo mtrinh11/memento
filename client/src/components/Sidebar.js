@@ -19,6 +19,7 @@ import { NavLink } from 'react-router-dom'
     render(){
         return (
             <ProSidebar 
+                width='98px'
                 collapsed={this.state.collapsed}
             > 
             <SidebarHeader > 
@@ -26,7 +27,9 @@ import { NavLink } from 'react-router-dom'
             </SidebarHeader>
                 <Menu iconShape="square">
                     <MenuItem>
-                        <button style ={{width:"50%", position: "right"}}onClick={this.handleCollapsed}>collapse</button>
+                        <p onClick={this.handleCollapsed}>
+                            <i className="small material-icons" style={{fontSize: '20px', color: 'white', border:"none"}} >menu</i>
+                        </p>
                     </MenuItem>
                     <MenuItem >         
                         <NavLink activeClassName="nav-active" to="/profile">
@@ -35,7 +38,7 @@ import { NavLink } from 'react-router-dom'
                     </MenuItem>
                     <MenuItem>
                         <NavLink activeClassName="nav-active" to="/profile/entry">
-                            Create an Entry
+                            <i className="material-icons">add_circle_outline</i> Add Entry
                         </NavLink>
                     </MenuItem>
                     {/* <SubMenu title="Physical" >
