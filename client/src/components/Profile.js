@@ -59,7 +59,7 @@ export default class Profile extends Component {
         const dateArray = []
         for (const id of this.state.allEntryIds){
             let singleEntry = await GetEntry(id);
-            dateArray.push({[singleEntry._id] : `${singleEntry.date} : ${(singleEntry.entry).substring(0,8)}...`})
+            dateArray.push({[singleEntry._id] : `${singleEntry.date} : ${(singleEntry.entry).substring(0,40)}...`})
         }
         dateArray.sort((a, b) => new Date(Object.values(b)[0].substring(0,10)) - new Date(Object.values(a)[0].substring(0,10)) );
         this.setState({plainDisplay: dateArray})
@@ -70,12 +70,12 @@ export default class Profile extends Component {
 
     render = () => {
         return (
-            <div style={{width:'70%', flexGrow:'1', padding: "80px"}}>
+            <div style={{width:'70%', flexGrow:'1', padding: "80px", height: '100%'}}>
                 <h3> Date: {this.state.date}</h3>
                 {this.state.pageLoading ? (
                     <h3>Loading...</h3>
                     ) : (
-                        <div>
+                        <div >
                             <CalendarHeatmap
                                 showWeekdayLabels={false}
                                 showMonthLabels={true}
@@ -102,6 +102,7 @@ export default class Profile extends Component {
                                     onMouseOver={(event) => {
                                         event.target.style.cursor = 'pointer'}
                                     }
+                                    style={{textAlign: 'center'}}
                                 >
                                     {Object.values(val)[0]}
                                 </p>

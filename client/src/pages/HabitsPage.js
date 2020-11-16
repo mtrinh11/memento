@@ -89,7 +89,8 @@ export default class HabitsPage extends Component {
                         <button onClick={this.deleteCurrentTracker} style={{marginTop: '20px'}}>delete</button>
                     </div> 
                     :
-                    <h2> You aren't tracking any habits!                  
+                    <h2> You aren't tracking any habits! 
+                        <br></br>                  
                         <button onClick={this.makeTracker}> Start Tracking!</button>
                     </h2>
                 }

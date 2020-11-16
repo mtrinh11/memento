@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ProSidebar, Menu, MenuItem, SidebarHeader } from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { NavLink } from 'react-router-dom';
 
@@ -18,14 +18,16 @@ import { NavLink } from 'react-router-dom';
 
     render(){
         return (
+            <div style={{height:'100%vh'}}>
             <ProSidebar 
                 width='100px'
                 collapsed={this.state.collapsed}
             > 
-            <SidebarHeader > 
-                <h1 style={{textAlign:"center", textTransform:"uppercase" }} >{this.props.User.name}</h1>
-            </SidebarHeader>
-                <Menu iconShape="square">
+                <SidebarHeader > 
+                    <h1 style={{textAlign:"center", textTransform:"uppercase" }} >{this.props.User.name}</h1>
+                </SidebarHeader>
+                <SidebarContent>
+                    <Menu iconShape="square">
                     <MenuItem>
                         <p onClick={this.handleCollapsed}>
                             <i className="small material-icons" style={{fontSize: '20px', color: 'white', border:"none"}} >menu</i>
@@ -46,15 +48,12 @@ import { NavLink } from 'react-router-dom';
                             Habit Tracker
                         </NavLink>
                     </MenuItem>
-                    {/* <SubMenu title="Physical" >
-                        <MenuItem>Diet</MenuItem>
-                    </SubMenu>
-                    <SubMenu title="Mental" >
-                        <MenuItem>Habit Tracker</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                    </SubMenu> */}
                 </Menu>
+                </SidebarContent>
+                <SidebarFooter>
+                </SidebarFooter>
             </ProSidebar>
+            </div>
         )
     }
 }
