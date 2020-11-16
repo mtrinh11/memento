@@ -7,7 +7,7 @@ module.exports = new Schema(
         todoList: {type: Schema.Types.ObjectId, ref: 'todos'},
         dietTracker: {type:Schema.Types.ObjectId, ref: 'diets'},
         sleep: {type: Number, required: false},
-        habits: [{type: String, required: false}]
+        habits: [{type: Object, required: false}]
     },
     {timestamps: true}
 )

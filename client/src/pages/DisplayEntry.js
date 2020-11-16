@@ -21,7 +21,7 @@ export default class DisplayEntry extends Component {
     }
 
     getReadableDate = () => {
-        const readable = (new Date(this.state.entry.date)).toDateString()
+        const readable = (new Date(`${this.state.entry.date}T00:00:00`)).toDateString()
         return readable
     }
 

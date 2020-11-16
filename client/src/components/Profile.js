@@ -52,6 +52,7 @@ export default class Profile extends Component {
     }
 
     render = () => {
+        console.log(this.state)
         return (
             <div style={{width:'70%', flexGrow:'1', padding: "80px"}}>
                 <p> Date: {this.state.date}</p>
@@ -65,7 +66,7 @@ export default class Profile extends Component {
                             startDate={(new Date ((new Date()).setDate((new Date()).getDate() - 110))).toLocaleDateString()}
                             endDate={(new Date(Date.now())).toLocaleDateString()}
                             onMouseOver={(event, value) => {
-                                return this.setState({date: (new Date(value.date)).toDateString()})
+                                return this.setState({date: (new Date(`${value.date}T00:00:00`)).toDateString()})
                             }}
                             onClick={(event) => (event.count===2 ? this.props.history.push(`/profile/entry/${event._id}`) : null)}
                             classForValue={(value) => {
