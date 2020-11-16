@@ -2,10 +2,10 @@
 import React, { Component } from 'react'
 
 import TextInput from '../components/TextInput'
-import {LogEntry} from '../services/JournalEntryServices'
+import {EditEntry, GetEntry} from '../services/JournalEntryServices'
 import {GetHabits} from '../services/HabitServices';
 
-export default class CreateEntry extends Component {
+export default class UpdateEntry extends Component {
     constructor() {
       super()
       this.state = {
@@ -17,8 +17,20 @@ export default class CreateEntry extends Component {
       }
     }
 
+    populate = async() => {
+        const entry = await GetEntry(this.props.match.params.post_id)
+        this.setState({
+            date: entry.date,
+            entry: entry.entry,
+            sleep: entry.sleep,
+            habits: entry.habits
+        })
+        console.log(entry)
+    }
+
     componentDidMount() {
       this.fetchHabits()
+      this.populate()
     }
   
     handleChange = ({ target }) => {
@@ -28,9 +40,9 @@ export default class CreateEntry extends Component {
     handleSubmit = async (e) => {
       e.preventDefault()
       try {
-        const loginData = await LogEntry(this.state, this.props.currentUser)
-        this.props.history.push('/profile')
+        await EditEntry(this.props.match.params.post_id, this.state)
         this.setState({ formError: false })
+        this.props.history.push(`/profile/entry/${this.props.match.params.post_id}`)
       } catch (error) {
         this.setState({ formError: true })
       }
@@ -59,6 +71,7 @@ export default class CreateEntry extends Component {
       const { date, entry, sleep } = this.state
       return (
         <div style={{padding:'100px'}}>
+            <h2> Updating Entry: </h2>
           <form className="flex-col" onSubmit={this.handleSubmit}>
             <TextInput
               style={{margin: '10px'}}

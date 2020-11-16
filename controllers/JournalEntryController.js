@@ -29,7 +29,6 @@ const GetJournalEntrys = async (req, res) => {
 
   const CreateJournalEntry = async (req, res) => {
     try {
-        console.log(req.body)
         const newEntry = new JournalEntry({ ...req.body})
         if (req.body.date != undefined) {
           console.log(newEntry)
@@ -44,8 +43,37 @@ const GetJournalEntrys = async (req, res) => {
     }
   }
 
+  const DeleteEntry = async(req, res) => {
+    try {
+      await JournalEntry.deleteOne({_id: req.params.journalentry_id})
+      await User.findByIdAndUpdate(
+        req.params.user_id,
+        { $pull:{entries: req.params.journalentry_id}},
+        { new: true, useFindAndModify: false }
+      )
+      res.send({msg:'success'})
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const UpdateEntry = async(req,res) => {
+    try {
+      await JournalEntry.findByIdAndUpdate(
+        req.params.post_id,
+        {...req.body},
+        { new: true, useFindAndModify: false },
+      )
+      res.send({msg: 'success'})
+    } catch (error) {
+      throw error
+    }
+  }
+
   module.exports = {
       GetJournalEntrys,
       CreateJournalEntry,
-      GetOneEntry
+      GetOneEntry,
+      DeleteEntry,
+      UpdateEntry
   }

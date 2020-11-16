@@ -26,3 +26,21 @@ export const GetAllEntrys = async(userId) => {
     throw error
   }
 }
+
+export const DeleteEntry = async(userId, entryId) => {
+  try {
+    const res = await ApiClient.delete(`/journal/delete/${userId}/${entryId}`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const EditEntry = async(postId,formData) => {
+  try {
+    const res = await ApiClient.put(`/journal/update/${postId}`, formData)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

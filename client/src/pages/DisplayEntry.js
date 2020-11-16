@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {GetEntry} from '../services/JournalEntryServices';
+import {GetEntry, DeleteEntry} from '../services/JournalEntryServices';
 
 export default class DisplayEntry extends Component {
     constructor() {
@@ -25,18 +25,27 @@ export default class DisplayEntry extends Component {
         return readable
     }
 
+    deleteEntry = async() => {
+        await DeleteEntry(this.props.currentUser._id, this.state.entry._id);
+        this.props.history.push('/profile')
+        return
+    }
+
+    sendUpdate = async() => {
+        this.props.history.push(`/profile/entry/update/${this.state.entry._id}`)
+        return
+    }
     render() {
-        console.log(this.state.entry)
+        console.log(this.state)
         return (
             <div style={{padding: "50px", width: "100%"}}>
                 <h2>Date: {this.getReadableDate()}</h2>
                 <h3 style={{ borderTop: "solid", padding: "20px"}}>Entry</h3>
                 <p style={{textAlign:'center', paddingBottom: '30px'}}> {this.state.entry.entry}</p>
-                <h3 style={{ borderTop: "solid", padding: "20px"}}>Notes</h3>
+                <h3 style={{ borderTop: "solid", padding: "20px"}}>Vitals</h3>
                 <p> {this.state.entry.sleep}</p>
-                {/* //need to implement deleteing and editing Entry */}
-                <button  style={{margin: "10px"}}>Edit Entry</button>  
-                <button>Delete Entry</button>
+                <button onClick={this.sendUpdate} style={{margin: "10px"}}>Edit Entry</button>  
+                <button onClick={this.deleteEntry}>Delete Entry</button>
             </div>         
         )
     }

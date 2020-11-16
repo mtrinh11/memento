@@ -7,6 +7,7 @@ import SignUp from '../pages/SignUp';
 import HomePage from '../pages/HomePage';
 import DisplayEntry from '../pages/DisplayEntry';
 import HabitsPage from '../pages/HabitsPage';
+import UpdateEntry from'../pages/UpdateEntry';
 
 import Layout from './Layout'
 import Sidebar from './Sidebar'
@@ -145,6 +146,19 @@ class Router extends Component {
                     >
                       <Sidebar User={this.state.currentUser}/>
                       <DisplayEntry {...props} currentUser={this.state.currentUser}/>
+                    </Layout>
+                  )}
+                />
+                <ProtectedRoute
+                  authenticated={this.state.authenticated}
+                  exact path="/profile/entry/update/:post_id"
+                  component={(props) => (
+                    <Layout
+                      currentUser={this.state.currentUser}
+                      authenticated={this.state.authenticated}
+                    >
+                      <Sidebar User={this.state.currentUser}/>
+                      <UpdateEntry {...props} currentUser={this.state.currentUser}/>
                     </Layout>
                   )}
                 />
