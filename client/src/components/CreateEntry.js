@@ -60,7 +60,7 @@ export default class CreateEntry extends Component {
     render() {
       const { date, entry, sleep, dietTracker } = this.state
       return (
-        <div style={{padding:' 50px 100px', width:'100%'}}>
+        <div style={{padding:'50px 100px', width:'100%vh', height: "100%vh", flexGrow:'1'}}>
           <form className="" onSubmit={this.handleSubmit}>
             <p>Date</p>
             <TextInput

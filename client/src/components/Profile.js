@@ -70,7 +70,7 @@ export default class Profile extends Component {
 
     render = () => {
         return (
-            <div style={{width:'70%', flexGrow:'1', padding: "80px", height: '100%'}}>
+            <div style={{width:'70%', flexGrow:'1', padding: "80px", height: '100%vh'}}>
                 <h3> Date: {this.state.date}</h3>
                 {this.state.pageLoading ? (
                     <h3>Loading...</h3>

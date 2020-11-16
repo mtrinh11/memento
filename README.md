@@ -3,7 +3,6 @@
 By Minh Trinh | November 17, 2020
 
 
-
 ## Contact
 
 [LinkedIn](https://www.linkedin.com/in/m-trinh/) | [Github](https://github.com/mtrinh11)
@@ -20,7 +19,7 @@ This web app is a place to track your journey in life. It can help you with refl
 - User will have to be authenticated
 - User will be able to have journal entries (which will include different aspects)
 - User will be able to go back to previous posts
-- User will be able to add sections for custom tracking
+- User journal entries will be fully CRUD-operable.
 
 
 
@@ -35,9 +34,9 @@ This web app is a place to track your journey in life. It can help you with refl
 
 ## Getting Started
 
-Start by ... The project was deployed on and can be found [here]().
+The project was deployed on and can be found [here](#).
 
 
 ## Credits
-Sidebar - https://github.com/azouaoui-med/react-pro-sidebar#readme
-Heatmap - https://github.com/kevinsqi/react-calendar-heatmap
+- Sidebar - https://github.com/azouaoui-med/react-pro-sidebar#readme
+- Heatmap - https://github.com/kevinsqi/react-calendar-heatmap

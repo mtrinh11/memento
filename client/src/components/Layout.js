@@ -9,9 +9,8 @@ export default ({ children, authenticated, currentUser }) => (
       currentUser={currentUser}
       className="header-elevated"
     />
-    <div style={{display:"flex", height: "100%", width: "100%"}}>
+    <div style={{display:"flex", height: "1000%vh", width: "100%vh", alignItems: "stretch", flexGrow: 1}}>
       {children}
     </div>
-    
   </div>
 )
