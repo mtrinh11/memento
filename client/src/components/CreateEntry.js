@@ -58,7 +58,6 @@ export default class CreateEntry extends Component {
     }
 
     render() {
-      console.log(this.state)
       const { date, entry, sleep, dietTracker } = this.state
       return (
         <div style={{padding:' 50px 100px', width:'100%'}}>

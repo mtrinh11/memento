@@ -11,6 +11,7 @@ export default class UpdateEntry extends Component {
       this.state = {
           formError: false,
           date: '',
+          dietTracker:[],
           entry: '',
           sleep: '',
           habits: []
@@ -23,7 +24,8 @@ export default class UpdateEntry extends Component {
             date: entry.date,
             entry: entry.entry,
             sleep: entry.sleep,
-            habits: entry.habits
+            habits: entry.habits,
+            dietTracker: entry.dietTracker
         })
         console.log(entry)
     }
@@ -68,11 +70,12 @@ export default class UpdateEntry extends Component {
     }
 
     render() {
-      const { date, entry, sleep } = this.state
+      const { date, entry, sleep, dietTracker } = this.state
       return (
-        <div style={{padding:'100px'}}>
+        <div style={{padding:'100px', width:'100%'}}>
             <h2> Updating Entry: </h2>
           <form className="flex-col" onSubmit={this.handleSubmit}>
+          <p>Date</p>
             <TextInput
               style={{margin: '10px'}}
               required={true}
@@ -83,6 +86,7 @@ export default class UpdateEntry extends Component {
               onChange={this.handleChange}
               
             />
+            <p>Sleep Tracker</p>
             <TextInput
               style={{width: '100%', textAlign: 'center', margin: '10px'}}
               placeholder="How many hours did you sleep last night?"
@@ -91,6 +95,17 @@ export default class UpdateEntry extends Component {
               value={sleep}
               onChange={this.handleChange}
             />
+            <p>Diet Tracker</p>
+            <TextInput
+              fieldType='textfield'
+              placeholder="ex. 10:00 oatmeal - 200 cals"
+              style={{width: '100%', margin: '10px'}}
+              name="dietTracker"
+              type="textarea"
+              value={dietTracker}
+              onChange={this.handleChange}
+            />
+            <p>Entry</p>
             <TextInput
               required={true}
               fieldType='textfield'
@@ -107,6 +122,7 @@ export default class UpdateEntry extends Component {
                 {this.state.habits.map((val, index) => (
                   <div key={index}>
                     <input 
+                      checked={Object.values(val)[0]}
                       type="checkbox" 
                       value={index} 
                       onClick={this.habitDone} 

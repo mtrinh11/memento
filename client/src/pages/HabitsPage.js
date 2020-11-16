@@ -18,7 +18,6 @@ export default class HabitsPage extends Component {
 
     doesTrackerExist = async() => {
         let res = await GetHabits(this.props.currentUser._id)
-        console.log(res)
         if (res.msg === false) {
             this.setState({exists: false})
             return
@@ -76,7 +75,6 @@ export default class HabitsPage extends Component {
     }
 
     render() {
-        console.log(this.state)
         return ( 
             <div style={{padding: '50px'}}>
                 { this.state.exists ?
