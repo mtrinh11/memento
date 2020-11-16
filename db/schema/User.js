@@ -14,6 +14,7 @@ module.exports = new Schema(
             type: String,
             required: true,
         },
+        habitId: {type: Schema.Types.ObjectId, ref: 'habits'},
         entries: [{type: Schema.Types.ObjectId, ref:'journalentrys'}]
     },
     { timestamps: true}

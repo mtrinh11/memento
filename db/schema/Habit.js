@@ -2,7 +2,7 @@ const {Schema} = require('mongoose')
 
 module.exports = new Schema (
     {
-        habits: [{type: String}],
+        habits: [{type: String}]
     },
     {timestamps: true}
 )

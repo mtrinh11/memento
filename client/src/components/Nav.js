@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../styles/Nav.css'
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 
 export default ({ authenticated, currentUser, className }) => {

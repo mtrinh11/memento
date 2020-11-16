@@ -28,12 +28,15 @@ export default class DisplayEntry extends Component {
     render() {
         console.log(this.state.entry)
         return (
-            <div style={{padding: "50px"}}>
+            <div style={{padding: "50px", width: "100%"}}>
                 <h2>Date: {this.getReadableDate()}</h2>
-                <h3>vitals</h3>
+                <h3 style={{ borderTop: "solid", padding: "20px"}}>Entry</h3>
+                <p style={{textAlign:'center', paddingBottom: '30px'}}> {this.state.entry.entry}</p>
+                <h3 style={{ borderTop: "solid", padding: "20px"}}>Notes</h3>
                 <p> {this.state.entry.sleep}</p>
-                <p> {this.state.entry.entry}</p>
-                
+                {/* //need to implement deleteing and editing Entry */}
+                <button  style={{margin: "10px"}}>Edit Entry</button>  
+                <button>Delete Entry</button>
             </div>         
         )
     }

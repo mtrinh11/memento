@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader } from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem, SidebarHeader } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
  class Sidebar extends Component{
     constructor() {
@@ -19,7 +19,7 @@ import { NavLink } from 'react-router-dom'
     render(){
         return (
             <ProSidebar 
-                width='98px'
+                width='100px'
                 collapsed={this.state.collapsed}
             > 
             <SidebarHeader > 
@@ -38,7 +38,12 @@ import { NavLink } from 'react-router-dom'
                     </MenuItem>
                     <MenuItem>
                         <NavLink activeClassName="nav-active" to="/profile/entry">
-                            <i className="material-icons">add_circle_outline</i> Add Entry
+                            Add Entry
+                        </NavLink>
+                    </MenuItem>
+                    <MenuItem>
+                        <NavLink activeClassName="nav-active" to="/profile/habits">
+                            Habit Tracker
                         </NavLink>
                     </MenuItem>
                     {/* <SubMenu title="Physical" >
