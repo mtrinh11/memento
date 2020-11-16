@@ -33,7 +33,7 @@ import { NavLink } from 'react-router-dom';
                     </MenuItem>
                     <MenuItem >         
                         <NavLink activeClassName="nav-active" to="/profile">
-                            All Posts
+                            Entries
                         </NavLink>
                     </MenuItem>
                     <MenuItem>

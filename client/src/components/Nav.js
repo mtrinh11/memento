@@ -14,7 +14,7 @@ export default ({ authenticated, currentUser, className }) => {
         >
           Sign Out
         </NavLink>
-        <h1> memento </h1>
+          <h1>memento</h1>
       </nav>
     </header>
   ) : (

@@ -81,14 +81,14 @@ export default class HabitsPage extends Component {
             <div style={{padding: '50px'}}>
                 { this.state.exists ?
                     <div> Currently Tracking:
-                        <form  onSubmit={this.addToTracker}>
-                            <input onChange={this.handleChange}>
-                            </input> 
-                        </form>
                         {this.state.habitsArray.map((val, index) => 
                             <p key={index} onClick={this.deleteOneItem}>{val} </p>
                         )}
-                        <button onClick={this.deleteCurrentTracker}> delete</button>
+                        <form  onSubmit={this.addToTracker}>
+                            <input onChange={this.handleChange} placeholder='ex. Meditation'>
+                            </input> 
+                        </form>
+                        <button onClick={this.deleteCurrentTracker} style={{marginTop: '20px'}}>delete</button>
                     </div> 
                     :
                     <h2> You aren't tracking any habits!                  

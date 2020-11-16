@@ -13,7 +13,9 @@ export default class CreateEntry extends Component {
           date: '',
           entry: '',
           sleep: '',
-          habits: []
+          habits: [],
+          todoList: [],
+          dietTracker:[]
       }
     }
 
@@ -28,7 +30,7 @@ export default class CreateEntry extends Component {
     handleSubmit = async (e) => {
       e.preventDefault()
       try {
-        const loginData = await LogEntry(this.state, this.props.currentUser)
+        await LogEntry(this.state, this.props.currentUser)
         this.props.history.push('/profile')
         this.setState({ formError: false })
       } catch (error) {
@@ -56,10 +58,12 @@ export default class CreateEntry extends Component {
     }
 
     render() {
-      const { date, entry, sleep } = this.state
+      console.log(this.state)
+      const { date, entry, sleep, dietTracker } = this.state
       return (
-        <div style={{padding:'100px'}}>
-          <form className="flex-col" onSubmit={this.handleSubmit}>
+        <div style={{padding:' 50px 100px', width:'100%'}}>
+          <form className="" onSubmit={this.handleSubmit}>
+            <p>Date</p>
             <TextInput
               style={{margin: '10px'}}
               required={true}
@@ -68,8 +72,8 @@ export default class CreateEntry extends Component {
               type="date"
               value={date}
               onChange={this.handleChange}
-              
             />
+            <p>Sleep Tracker</p>
             <TextInput
               style={{width: '100%', textAlign: 'center', margin: '10px'}}
               placeholder="How many hours did you sleep last night?"
@@ -78,6 +82,17 @@ export default class CreateEntry extends Component {
               value={sleep}
               onChange={this.handleChange}
             />
+            <p>Diet Tracker</p>
+            <TextInput
+              fieldType='textfield'
+              placeholder="ex. 10:00 oatmeal - 200 cals"
+              style={{width: '100%', margin: '10px'}}
+              name="dietTracker"
+              type="textarea"
+              value={dietTracker}
+              onChange={this.handleChange}
+            />
+            <p>Entry</p>
             <TextInput
               required={true}
               fieldType='textfield'
