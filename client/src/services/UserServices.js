@@ -31,7 +31,6 @@ export const LoginUser = async (userData) => {
   try {
     const res = await ApiClient.post('/users/login', userData)
     localStorage.setItem('token', res.data.token)
-    // console.log(res.data)
     return res.data
   } catch (error) {
     throw error

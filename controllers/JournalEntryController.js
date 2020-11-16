@@ -31,7 +31,6 @@ const GetJournalEntrys = async (req, res) => {
     try {
         const newEntry = new JournalEntry({ ...req.body})
         if (req.body.date != undefined) {
-          console.log(newEntry)
           newEntry.save()
           await User.updateOne({_id: req.params.user_id},
             {$push: {entries: newEntry}}

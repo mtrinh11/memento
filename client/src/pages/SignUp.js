@@ -16,7 +16,6 @@ export default class SignUp extends Component {
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value })
-    // console.log(this.state)
   }
 
   handleSubmit = async (e) => {
@@ -25,7 +24,7 @@ export default class SignUp extends Component {
       await RegisterUser(this.state)
       this.props.history.push('/login')
     } catch (error) {
-      console.log(error)
+      throw error
     }
   }
   render() {

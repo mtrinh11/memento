@@ -12,7 +12,6 @@ import { NavLink } from 'react-router-dom';
     }
 
     handleCollapsed = () => {
-        // console.log(this.state)
         this.setState({collapsed: !this.state.collapsed})
     }
 

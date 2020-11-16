@@ -36,7 +36,6 @@ export default class DisplayEntry extends Component {
         return
     }
     render() {
-        console.log(this.state)
         return (
             <div style={{padding: "50px", width: "100%"}}>
                 <h2>Date: {this.getReadableDate()}</h2>

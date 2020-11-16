@@ -27,7 +27,6 @@ export default class UpdateEntry extends Component {
             habits: entry.habits,
             dietTracker: entry.dietTracker
         })
-        console.log(entry)
     }
 
     componentDidMount() {

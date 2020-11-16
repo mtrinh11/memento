@@ -43,7 +43,6 @@ const SignInUser = async (req, res, next) => {
         _id: user._id,
         name: user.name,
       }
-      console.log(payload)
       res.locals.payload = payload
       return next()
     }
