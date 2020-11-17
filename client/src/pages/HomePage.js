@@ -3,11 +3,8 @@ import '../styles/HomePage.css';
 
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
+
 import Icon from '@material-ui/core/Icon';
-import SaveIcon from '@material-ui/icons/Save';
 
 import {Link} from 'react-router-dom';
 
@@ -33,8 +30,7 @@ export default () => {
                 textShadow:'2px 2px 5px black'
             }}>
                 <h1> Welcome to memento!</h1>
-                {/* write description */}
-                <h3> this is what it's about</h3>
+                <h3> Document your days and create your narrative.</h3>
                 <div>
                     <Link to='/register' style={{textDecoration: 'none'}}> 
                         <Button

@@ -79,7 +79,6 @@ export default class HabitsPage extends Component {
     }
 
     render() {
-        console.log(this.state)
         return ( 
             <div style={{padding: '50px'}}>
                 { this.state.exists ?

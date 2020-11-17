@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const ApiClient = axios.create({ baseURL: 'http://localhost:3001/api' })
+const ApiClient = axios.create({ baseURL: process.env.REACT_APP_API_URL  })
 
 ApiClient.interceptors.request.use(
   async (config) => {

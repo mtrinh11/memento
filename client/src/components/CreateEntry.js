@@ -5,6 +5,10 @@ import TextInput from '../components/TextInput'
 import {LogEntry} from '../services/JournalEntryServices'
 import {GetHabits} from '../services/HabitServices';
 import SaveButton from './SaveButton'
+import UploadButton from './UploadButton'
+
+const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME
+const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET
 
 export default class CreateEntry extends Component {
     constructor() {
@@ -16,7 +20,18 @@ export default class CreateEntry extends Component {
           sleep: '',
           habits: [],
           todoList: [],
-          dietTracker:[]
+          dietTracker:[],
+          imgUrls: [],
+          widget: window.cloudinary.createUploadWidget(
+            {
+              cloudName: CLOUD_NAME, 
+              uploadPreset: UPLOAD_PRESET,
+              multiple: false,
+              resourceType: "image", 
+              maxFileSize: 1500000
+            },
+            (error, result) => {this.checkUpload(result)}
+          )
       }
     }
 
@@ -58,11 +73,20 @@ export default class CreateEntry extends Component {
       this.setState({habits: checkedHabit})
     }
 
+    checkUpload = async (resultEvent) => {
+      if (resultEvent.event === 'success') {
+        try {
+          const url = await resultEvent.info.secure_url
+          if (url) {
+              this.setState({imgUrls: [...this.state.imgUrls, url]})
+          }
+        } 
+        catch(err) {throw err}
+      }
+    }
     
     render() {
       const { date, entry, sleep, dietTracker } = this.state
-      
-
       return (
         <div className="row"style={{padding:'50px 100px', width:'100%vh', height: "100%vh", flexGrow:'1'}}>
           <form className="col s12" onSubmit={this.handleSubmit}>
@@ -122,8 +146,12 @@ export default class CreateEntry extends Component {
                 ))}
               </div> 
               : 
-              <p>no habits</p>
+              <p>There are no habits in the Habit Tracker.</p>
             }
+            <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
+              <UploadButton onclick={() => {this.state.widget.open()}} text='Upload Photo'></UploadButton>
+              <p>You have uploaded {this.state.imgUrls.length === 1 ? `1 photo` : `${this.state.imgUrls.length} photos`}  for this entry.</p>
+            </div>
             <br/><br/>
             <SaveButton></SaveButton>
             <br/><br/>

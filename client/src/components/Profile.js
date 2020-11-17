@@ -102,7 +102,7 @@ export default class Profile extends Component {
                                     onMouseOver={(event) => {
                                         event.target.style.cursor = 'pointer'}
                                     }
-                                    style={{textAlign: 'center'}}
+                                    style={{}}
                                 >
                                     {Object.values(val)[0]}
                                 </p>

@@ -14,7 +14,7 @@ export default ({ authenticated, currentUser, className }) => {
         >
           Sign Out
         </NavLink>
-          <h1>memento</h1>
+          <h1><a href='/profile'>memento</a></h1>
       </nav>
     </header>
   ) : (
@@ -27,7 +27,7 @@ export default ({ authenticated, currentUser, className }) => {
         <NavLink activeClassName="nav-active" to="/login">
           Sign In
         </NavLink>
-        <h1> memento </h1>
+        <h1><a href='/profile'>memento</a></h1>
       </nav>
     </header>
   )

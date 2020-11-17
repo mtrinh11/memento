@@ -48,19 +48,29 @@ export default class DisplayEntry extends Component {
                 {(this.state.entry.habits && this.state.entry.habits.length > 0) ? 
                     <div>
                         <h3 style={{ borderTop: "solid", padding: "20px"}}>Habits</h3>
-                        {this.state.entry.habits.map((val) => {
+                        {this.state.entry.habits.map((val, index) => {
                             return (
-                                <p>{Object.values(val)[0] ?<i class="large material-icons">check</i> : <i class="large material-icons">close</i>} {Object.keys(val)[0]} </p>
+                                <p key={index}>{Object.values(val)[0] ?<i className="large material-icons">check</i> : <i className="large material-icons">close</i>} {Object.keys(val)[0]} </p>
                             )
                         })}
                         <p style={{ paddingBottom: '40px'}}></p>
                     </div>
                     :
-                    <p></p>
+                    <div></div>
                 }
 
                 <h3 style={{ borderTop: "solid", padding: "20px"}}>Entry</h3>
-                <p style={{textAlign:'center', paddingBottom: '30px'}}>{this.state.entry.entry}</p>
+                <p style={{textAlign:'center', paddingBottom: '30px'}}>
+                    {(this.state.entry.imgUrls && this.state.entry.imgUrls.length > 0) ?
+                        <div>
+                            {this.state.entry.imgUrls.map((val, index) => { return (
+                                <img src={val} alt={index}></img>
+                            )})} 
+                        </div>
+                        : <div></div>
+                    }
+                    {this.state.entry.entry}
+                </p>
                 <NoIconButton onclick={() => {this.sendUpdate()}} text='Edit Entry'></NoIconButton>
                 <NoIconButton onclick={() => {this.deleteEntry()}} text='Delete Entry'></NoIconButton>
             </div>

@@ -5,6 +5,11 @@ import TextInput from '../components/TextInput'
 import {EditEntry, GetEntry} from '../services/JournalEntryServices'
 import {GetHabits} from '../services/HabitServices';
 import SaveButton from '../components/SaveButton'
+import UploadButton from '../components/UploadButton'
+import DeleteButton from '../components/DeleteButton'
+
+const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME
+const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET
 
 export default class UpdateEntry extends Component {
     constructor() {
@@ -15,7 +20,18 @@ export default class UpdateEntry extends Component {
           dietTracker:[],
           entry: '',
           sleep: '',
-          habits: []
+          habits: [],
+          imgUrls: [],
+          widget: window.cloudinary.createUploadWidget(
+            {
+              cloudName: CLOUD_NAME, 
+              uploadPreset: UPLOAD_PRESET,
+              multiple: false,
+              resourceType: "image", 
+              maxFileSize: 1500000
+            },
+            (error, result) => {this.checkUpload(result)}
+          )
       }
     }
 
@@ -26,7 +42,8 @@ export default class UpdateEntry extends Component {
             entry: entry.entry,
             sleep: entry.sleep,
             habits: entry.habits,
-            dietTracker: entry.dietTracker
+            dietTracker: entry.dietTracker,
+            imgUrls: entry.imgUrls
         })
     }
 
@@ -69,8 +86,31 @@ export default class UpdateEntry extends Component {
       this.setState({habits: checkedHabit})
     }
 
+    checkUpload = async (resultEvent) => {
+      if (resultEvent.event === 'success') {
+        try {
+          const url = await resultEvent.info.secure_url
+          if (url) {
+              this.setState({imgUrls: [...this.state.imgUrls, url]})
+          }
+        } 
+        catch(err) {throw err}
+      }
+    }
+
+    deleteImg = (removeIndex) =>{
+      let newImgArray = this.state.imgUrls.filter((val, index) => {
+        if (index === removeIndex) {
+          return false
+        }
+        return true
+      })
+      this.setState({imgUrls: newImgArray})
+    }
+
     render() {
       const { date, entry, sleep, dietTracker } = this.state
+      console.log(this.state)
       return (
         <div style={{padding:'100px', width:'100%'}}>
             <h2> Updating Entry: </h2>
@@ -117,24 +157,49 @@ export default class UpdateEntry extends Component {
               onChange={this.handleChange}
             />
             <p> Habit Tracker</p>
-            {(this.state.habits && this.state.habits.length >= 1) ? 
-              <div>
-                {this.state.habits.map((val, index) => (
-                  <div key={index}>
-                    <input 
-                      checked={Object.values(val)[0]}
-                      type="checkbox" 
-                      value={index} 
-                      onClick={this.habitDone} 
-                      style={{textAlign:"left", width:"10px", marginRight: "10px", display: "inline" }}
-                    />
-                    <p style={{width: '10px', display:'inline'}}>{Object.keys(val)}</p>
+            <div style={{marginBottom:'50px', textAlign: 'center'}}>
+              {(this.state.habits && this.state.habits.length >= 1) ? 
+                <div style={{marginBottom:'50px'}}>
+                  {this.state.habits.map((val, index) => (
+                    <div key={index}>
+                      <input 
+                        checked={Object.values(val)[0]}
+                        type="checkbox" 
+                        value={index} 
+                        onChange={this.habitDone} 
+                        style={{textAlign:"left", width:"10px", marginRight: "10px", display: "inline" }}
+                      />
+                      <p style={{width: '10px', display:'inline'}}>{Object.keys(val)}</p>
+                    </div>
+                  ))}
+                </div> 
+                : 
+                <p>no habits</p>
+              }
+            </div>
+            <p> Photos</p>
+            <div >
+              {(this.state.imgUrls && this.state.imgUrls.length > 0)? 
+                <div> 
+                  <div>
+                    {this.state.imgUrls.map((val, index) => { return (
+                      <div key={index} style={{display:'table', height: '100%', margin: '0 auto' }}> 
+                        <img src={val} alt={index} style={{width:'200px', verticalAlign: 'middle'}}/>
+                        <DeleteButton onclick={() => this.deleteImg(index)}text='Delete Photo'></DeleteButton>
+                      </div>
+                    )})}
                   </div>
-                ))}
-              </div> 
-              : 
-              <p>no habits</p>
-            }
+                  <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
+                    <UploadButton onclick={() => {this.state.widget.open()}} text='Upload Photo'></UploadButton>
+                  </div>
+                </div>
+                  :
+                <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
+                  <UploadButton onclick={() => {this.state.widget.open()}} text='Upload Photo'></UploadButton>
+                </div>
+              }
+            </div>
+            
             <br/><br/>
             <SaveButton></SaveButton>
             <br/><br/>

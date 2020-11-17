@@ -7,7 +7,8 @@ module.exports = new Schema(
         todoList: [{type: String, required: false}],
         dietTracker: [{type: String, required: false}],
         sleep: {type: Number, required: false},
-        habits: [{type: Object, required: false}]
+        habits: [{type: Object, required: false}],
+        imgUrls: [{type: String, required: false}],
     },
     {timestamps: true}
 )
