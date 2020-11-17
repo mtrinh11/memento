@@ -1,4 +1,3 @@
-// const { reset } = require('nodemon');
 const { User } = require('../db/models')
 const jwt = require('jsonwebtoken')
 const {
@@ -9,7 +8,6 @@ const {
 const GetProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.user_id).select('_id name')
-    // const posts = await TravelLog.find({ user_id: req.params.user_id })
     res.send({ user })
   } catch (error) {
     throw error

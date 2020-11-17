@@ -58,8 +58,6 @@ export default class DisplayEntry extends Component {
                     :
                     <p></p>
                 }
-                
-                
 
                 <h3 style={{ borderTop: "solid", padding: "20px"}}>Entry</h3>
                 <p style={{textAlign:'center', paddingBottom: '30px'}}>{this.state.entry.entry}</p>

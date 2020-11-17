@@ -1,16 +1,7 @@
 const {JournalEntry, User} = require('../db/models');
 
-
 const GetJournalEntrys = async (req, res) => {
     try {
-        // const { page, limit } = req.query
-        // const offset =
-        // page === '1' ? 0 : Math.floor(parseInt(page) * parseInt(limit))
-        // const posts = await JournalEntry.find()
-        //     .limit(parseInt(limit))
-        //     .skip(offset)
-        //     .sort({ popularity_rating: 'desc' })
-
         const entrys = await User.findById(req.params.user_id)
         res.send(entrys.entries)
     } catch (error) {

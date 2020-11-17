@@ -1,5 +1,4 @@
 const {Habit, User} = require('../db/models')
-const {Schema} = require('mongoose')
 
 const GetHabits = async (req, res) =>{
     try {

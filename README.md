@@ -40,3 +40,5 @@ The project was deployed on and can be found [here](#).
 ## Credits
 - Sidebar - https://github.com/azouaoui-med/react-pro-sidebar#readme
 - Heatmap - https://github.com/kevinsqi/react-calendar-heatmap
+- TextInputs, Buttons - https://material-ui.com/
+- Tab icon - https://icons8.com/icons
