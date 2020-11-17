@@ -6,6 +6,7 @@ import {LogEntry} from '../services/JournalEntryServices'
 import {GetHabits} from '../services/HabitServices';
 import SaveButton from './SaveButton'
 import UploadButton from './UploadButton'
+import DeleteButton from './DeleteButton'
 
 const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME
 const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET
@@ -84,6 +85,16 @@ export default class CreateEntry extends Component {
         catch(err) {throw err}
       }
     }
+
+    deleteImg = (removeIndex) =>{
+      let newImgArray = this.state.imgUrls.filter((val, index) => {
+        if (index === removeIndex) {
+          return false
+        }
+        return true
+      })
+      this.setState({imgUrls: newImgArray})
+    }
     
     render() {
       const { date, entry, sleep, dietTracker } = this.state
@@ -131,7 +142,8 @@ export default class CreateEntry extends Component {
               onChange={this.handleChange}
             />
             <p> Habit Tracker</p>
-            {(this.state.habits && this.state.habits.length >= 1) ? 
+            <div style={{textAlign: 'center'}}>
+              {(this.state.habits && this.state.habits.length >= 1) ? 
               <div>
                 {this.state.habits.map((val, index) => (
                   <div key={index} >
@@ -147,11 +159,36 @@ export default class CreateEntry extends Component {
               </div> 
               : 
               <p>There are no habits in the Habit Tracker.</p>
-            }
-            <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
+              }
+            </div>
+            
+            <p> Photos</p>
+            <div >
+              {(this.state.imgUrls && this.state.imgUrls.length > 0)? 
+                <div> 
+                  <div>
+                    {this.state.imgUrls.map((val, index) => { return (
+                      <div key={index} style={{display:'table', height: '100%', margin: '0 auto' }}> 
+                        <img src={val} alt={index} style={{width:'200px', verticalAlign: 'middle'}}/>
+                        <DeleteButton onclick={() => this.deleteImg(index)}text='Delete Photo'></DeleteButton>
+                      </div>
+                    )})}
+                  </div>
+                  <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
+                    <UploadButton onclick={() => {this.state.widget.open()}} text='Upload Photo'></UploadButton>
+                  </div>
+                </div>
+                  :
+                <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
+                  <UploadButton onclick={() => {this.state.widget.open()}} text='Upload Photo'></UploadButton>
+                </div>
+              }
+            </div>
+            
+            {/* <div style={{margin:"50px 0 0 20px", textAlign:'center'}}>
               <UploadButton onclick={() => {this.state.widget.open()}} text='Upload Photo'></UploadButton>
               <p>You have uploaded {this.state.imgUrls.length === 1 ? `1 photo` : `${this.state.imgUrls.length} photos`}  for this entry.</p>
-            </div>
+            </div> */}
             <br/><br/>
             <SaveButton></SaveButton>
             <br/><br/>
