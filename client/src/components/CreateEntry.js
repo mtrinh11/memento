@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import TextInput from '../components/TextInput'
 import {LogEntry} from '../services/JournalEntryServices'
 import {GetHabits} from '../services/HabitServices';
+import SaveButton from './SaveButton'
 
 export default class CreateEntry extends Component {
     constructor() {
@@ -57,11 +58,14 @@ export default class CreateEntry extends Component {
       this.setState({habits: checkedHabit})
     }
 
+    
     render() {
       const { date, entry, sleep, dietTracker } = this.state
+      
+
       return (
-        <div style={{padding:'50px 100px', width:'100%vh', height: "100%vh", flexGrow:'1'}}>
-          <form className="" onSubmit={this.handleSubmit}>
+        <div className="row"style={{padding:'50px 100px', width:'100%vh', height: "100%vh", flexGrow:'1'}}>
+          <form className="col s12" onSubmit={this.handleSubmit}>
             <p>Date</p>
             <TextInput
               style={{margin: '10px'}}
@@ -96,7 +100,7 @@ export default class CreateEntry extends Component {
               required={true}
               fieldType='textfield'
               placeholder="Today I..."
-              style={{width: '100%', height: "200px", margin: '10px'}}
+              style={{width: '100%', margin: '10px'}}
               name="entry"
               type="textarea"
               value={entry}
@@ -106,7 +110,7 @@ export default class CreateEntry extends Component {
             {(this.state.habits && this.state.habits.length >= 1) ? 
               <div>
                 {this.state.habits.map((val, index) => (
-                  <div key={index}>
+                  <div key={index} >
                     <input 
                       type="checkbox" 
                       value={index} 
@@ -121,7 +125,7 @@ export default class CreateEntry extends Component {
               <p>no habits</p>
             }
             <br/><br/>
-            <button>Enter</button>
+            <SaveButton></SaveButton>
             <br/><br/>
             {this.state.formError ? <p>Error While Submitting Entry</p> : <p></p>}
           </form>

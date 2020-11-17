@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import TextInput from '../components/TextInput'
 import {EditEntry, GetEntry} from '../services/JournalEntryServices'
 import {GetHabits} from '../services/HabitServices';
+import SaveButton from '../components/SaveButton'
 
 export default class UpdateEntry extends Component {
     constructor() {
@@ -109,7 +110,7 @@ export default class UpdateEntry extends Component {
               required={true}
               fieldType='textfield'
               placeholder="Today I..."
-              style={{width: '100%', height: "200px", margin: '10px'}}
+              style={{width: '100%', margin: '10px'}}
               name="entry"
               type="textarea"
               value={entry}
@@ -135,7 +136,7 @@ export default class UpdateEntry extends Component {
               <p>no habits</p>
             }
             <br/><br/>
-            <button>Enter</button>
+            <SaveButton></SaveButton>
             <br/><br/>
             {this.state.formError ? <p>Error While Submitting Entry</p> : <p></p>}
           </form>

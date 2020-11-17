@@ -3,6 +3,7 @@ import '../styles/Signup.css'
 import React, { Component } from 'react'
 import TextInput from '../components/TextInput'
 import { RegisterUser } from '../services/UserServices'
+import SendButton from '../components/SendButton'
 
 export default class SignUp extends Component {
   constructor() {
@@ -30,7 +31,7 @@ export default class SignUp extends Component {
   render() {
     const { name, password, email } = this.state
     return (
-      <div className="signup flex-col">
+      <div className="signup flex-col" style={{textAlign:'center'}}>
         <form className="flex-col" onSubmit={this.handleSubmit}>
           <TextInput
             placeholder="Your Email"
@@ -39,6 +40,7 @@ export default class SignUp extends Component {
             type="email"
             onChange={this.handleChange}
           />
+          <br/> <br/> <br/>
           <TextInput
             placeholder="Your Name"
             type="text"
@@ -46,6 +48,7 @@ export default class SignUp extends Component {
             value={name}
             onChange={this.handleChange}
           />
+          <br/> <br/> <br/>
           <TextInput
             placeholder="Password"
             type="password"
@@ -53,7 +56,8 @@ export default class SignUp extends Component {
             value={password}
             onChange={this.handleChange}
           />
-          <button>Sign Up</button>
+          <br/> <br/> <br/>
+          <SendButton text='Sign Up'></SendButton>
         </form>
       </div>
     )

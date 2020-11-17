@@ -2,6 +2,7 @@ import '../styles/Signup.css'
 import React, { Component } from 'react'
 import TextInput from '../components/TextInput'
 import { LoginUser } from '../services/UserServices'
+import SendButton from '../components/SendButton'
 
 export default class SignIn extends Component {
   constructor() {
@@ -28,10 +29,11 @@ export default class SignIn extends Component {
       this.setState({ formError: true })
     }
   }
+  
   render() {
     const { email, password } = this.state
     return (
-      <div className="signin flex-col">
+      <div className="signin flex-col" style={{textAlign: 'center'}}>
         <form className="flex-col" onSubmit={this.handleSubmit}>
           <TextInput
             placeholder="Your Email"
@@ -40,6 +42,7 @@ export default class SignIn extends Component {
             value={email}
             onChange={this.handleChange}
           />
+          <br/> <br/> <br/>
           <TextInput
             placeholder="Password"
             name="password"
@@ -47,7 +50,8 @@ export default class SignIn extends Component {
             value={password}
             onChange={this.handleChange}
           />
-          <button>Sign In</button>
+          <br/> <br/> <br/>
+          <SendButton text='Sign In'></SendButton>
           {this.state.formError ? <p>Error While Logging In</p> : <p></p>}
         </form>
       </div>

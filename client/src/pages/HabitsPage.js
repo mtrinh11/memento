@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {GetHabits, CreateTracker, UpdateTracker, DeleteTracker} from '../services/HabitServices'
 
+import DeleteButton from '../components/DeleteButton'
+import UploadButton from '../components/UploadButton'
+
 export default class HabitsPage extends Component {
     constructor() {
         super()
@@ -41,6 +44,7 @@ export default class HabitsPage extends Component {
         e.preventDefault()
         try {
             await UpdateTracker(this.state.habitsId, {habits: [...this.state.habitsArray, this.state.addItem.trim()]})
+            this.setState({ addItem: ''})
             this.doesTrackerExist();
         } catch (error) {
             throw error
@@ -75,23 +79,32 @@ export default class HabitsPage extends Component {
     }
 
     render() {
+        console.log(this.state)
         return ( 
             <div style={{padding: '50px'}}>
                 { this.state.exists ?
-                    <div> Currently Tracking:
-                        {this.state.habitsArray.map((val, index) => 
-                            <p key={index} onClick={this.deleteOneItem}>{val} </p>
-                        )}
+                    <div> 
+                        <p>Currently Tracking:</p>
                         <form  onSubmit={this.addToTracker}>
-                            <input onChange={this.handleChange} placeholder='ex. Meditation'>
+                            <input onChange={this.handleChange} placeholder='ex. Meditation' value={this.state.addItem}>
                             </input> 
                         </form>
-                        <button onClick={this.deleteCurrentTracker} style={{marginTop: '20px'}}>delete</button>
+                        <div style={{paddingLeft: '30px'}}> 
+                            {this.state.habitsArray.map((val, index) => 
+                            <p key={index} onClick={this.deleteOneItem}>{val} </p>
+                            )}
+                        </div>
+                        
+                        <div style={{marginTop: '40px'}}> 
+                            <DeleteButton onclick={() => this.deleteCurrentTracker()} text='Start From Scratch'></DeleteButton>
+                        </div>
                     </div> 
                     :
                     <h2> You aren't tracking any habits! 
                         <br></br>                  
-                        <button onClick={this.makeTracker}> Start Tracking!</button>
+                        <div style={{marginTop: '40px'}}> 
+                            <UploadButton onclick={() => this.makeTracker()} text='Start Tracking'></UploadButton>
+                        </div>
                     </h2>
                 }
             </div>

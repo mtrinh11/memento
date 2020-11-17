@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {GetEntry, DeleteEntry} from '../services/JournalEntryServices';
+import NoIconButton from '../components/NoIconButton'
 
 export default class DisplayEntry extends Component {
     constructor() {
@@ -62,9 +63,8 @@ export default class DisplayEntry extends Component {
 
                 <h3 style={{ borderTop: "solid", padding: "20px"}}>Entry</h3>
                 <p style={{textAlign:'center', paddingBottom: '30px'}}>{this.state.entry.entry}</p>
-
-                <button onClick={this.sendUpdate} style={{margin: "10px"}}>Edit Entry</button>  
-                <button onClick={this.deleteEntry}>Delete Entry</button>
+                <NoIconButton onclick={() => {this.sendUpdate()}} text='Edit Entry'></NoIconButton>
+                <NoIconButton onclick={() => {this.deleteEntry()}} text='Delete Entry'></NoIconButton>
             </div>
         )
     }
