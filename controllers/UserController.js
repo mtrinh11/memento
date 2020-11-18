@@ -41,7 +41,7 @@ const SignInUser = async (req, res, next) => {
         _id: user._id,
         name: user.name,
       }
-      res.locals.payload = payload
+      // res.locals.payload = payload
       return next()
     }
     res.status(401).send({ msg: 'Unauthorized' })
