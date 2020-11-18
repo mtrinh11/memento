@@ -25,8 +25,8 @@ app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Initialize Middleware
 app.disable('X-Powered-By')
-app.get('/', (req, res) => res.send({ msg: 'Server Working' }))
 app.use('/api', AppRouter)
+// app.get('/', (req, res) => res.send({ msg: 'Server Working' }))
 
 //for deployment
 app.get('*', (req, res) =>
