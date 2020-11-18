@@ -10,18 +10,28 @@ const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3001
 const app = express()
 
+//for deployment
+const path = require('path');
+
 // Initialize Middleware
 app.use(logger('dev'))
-app.use(helmet())
+app.use(helmet({ contentSecurityPolicy: false }))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+//for deployment
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Initialize Middleware
 app.disable('X-Powered-By')
 app.get('/', (req, res) => res.send({ msg: 'Server Working' }))
 app.use('/api', AppRouter)
+
+//for deployment
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+)
 
 app.listen(PORT, async () => {
   try {

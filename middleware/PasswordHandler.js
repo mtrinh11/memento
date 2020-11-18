@@ -11,6 +11,7 @@ const generatePassword = async (password) => {
 const checkPassword = async (sentPassword, storedPassword) => {
   const passwordValid = await bcrypt.compare(sentPassword, storedPassword)
   return passwordValid
+  // return true
 }
 
 module.exports = {
