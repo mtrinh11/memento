@@ -34,7 +34,7 @@ This web app is a place to track your journey in life. It can help you with refl
 
 ## Getting Started
 
-The project was deployed on and can be found [here](#).
+The project was deployed on and can be found [here](#https://mementoapplication.herokuapp.com/).
 
 
 ## Credits
